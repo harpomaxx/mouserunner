@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://m3eub0tuhdsc"]
+
+[ext_resource type="Script" uid="uid://dex4ctgryb6n8" path="res://cat.gd" id="1_52fj1"]
+[ext_resource type="Texture2D" uid="uid://cl4cxtsvp11i4" path="res://art/cat.01-scaled.down.100x100.png" id="1_hcucf"]
+[ext_resource type="Texture2D" uid="uid://e2rcexgh2n1d" path="res://art/starburst.png" id="2_6fl1u"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_52fj1"]
+radius = 24.0
+height = 80.0
+
+[node name="Cat" type="Area2D"]
+script = ExtResource("1_52fj1")
+collected_texture = ExtResource("2_6fl1u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_hcucf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_52fj1")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

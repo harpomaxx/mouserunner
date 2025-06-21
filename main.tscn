@@ -1,0 +1,188 @@
+[gd_scene load_steps=11 format=3 uid="uid://c8ekxgn5514yk"]
+
+[ext_resource type="Script" uid="uid://d2pw1b1yvh670" path="res://backgrounds.gd" id="1_1bvp3"]
+[ext_resource type="Script" uid="uid://cufedcksufrn8" path="res://main.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://cijtxyy7ntm2u" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://bxmppcjxjw1qx" path="res://player.gd" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://clcrh377gick1" path="res://cheese.tscn" id="2_7mycd"]
+[ext_resource type="PackedScene" uid="uid://m3eub0tuhdsc" path="res://cat.tscn" id="3_272bh"]
+[ext_resource type="Texture2D" uid="uid://d4mj7uh6ou613" path="res://art/pause.png" id="4_efxa6"]
+[ext_resource type="Texture2D" uid="uid://b5fu60y2aux3j" path="res://art/play-buttton.png" id="5_dg77c"]
+[ext_resource type="Texture2D" uid="uid://cancc07pry1g2" path="res://art/road-scaled.down.600x600.png" id="7_4c57u"]
+[ext_resource type="FontFile" uid="uid://dl0o57maj6unc" path="res://fonts/Xolonium-Regular.ttf" id="8_5vw27"]
+
+[node name="Main" type="Node2D"]
+position = Vector2(-16, -16)
+script = ExtResource("1_h2yge")
+cheese_scene = ExtResource("2_7mycd")
+cat_scene = ExtResource("3_272bh")
+pause_icon = ExtResource("4_efxa6")
+play_icon = ExtResource("5_dg77c")
+
+[node name="Backgrounds" type="Node2D" parent="."]
+script = ExtResource("1_1bvp3")
+
+[node name="Background1" type="Sprite2D" parent="Backgrounds"]
+position = Vector2(944, -560)
+texture = ExtResource("7_4c57u")
+centered = false
+
+[node name="Background2" type="Sprite2D" parent="Backgrounds"]
+position = Vector2(1048, 144)
+texture = ExtResource("7_4c57u")
+centered = false
+
+[node name="CheeseLabel" type="Label" parent="."]
+top_level = true
+offset_left = 8.0
+offset_right = 204.0
+offset_bottom = 159.0
+theme_override_colors/font_color = Color(0.933333, 0.423529, 0.301961, 1)
+theme_override_fonts/font = ExtResource("8_5vw27")
+theme_override_font_sizes/font_size = 24
+text = "Score
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="LevelLabel" type="Label" parent="."]
+top_level = true
+offset_left = 16.0
+offset_top = 60.0
+offset_right = 195.0
+offset_bottom = 138.0
+theme_override_colors/font_color = Color(0.933333, 0.423529, 0.301961, 1)
+theme_override_fonts/font = ExtResource("8_5vw27")
+theme_override_font_sizes/font_size = 24
+text = "Level: 1"
+metadata/_edit_use_anchors_ = true
+
+[node name="LivesLabel" type="Label" parent="."]
+top_level = true
+offset_left = 16.0
+offset_top = 30.0
+offset_right = 195.0
+offset_bottom = 108.0
+theme_override_colors/font_color = Color(0.933333, 0.423529, 0.301961, 1)
+theme_override_fonts/font = ExtResource("8_5vw27")
+theme_override_font_sizes/font_size = 24
+text = "Lives"
+metadata/_edit_use_anchors_ = true
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="LaneLeft" type="Marker2D" parent="."]
+position = Vector2(168, 531)
+
+[node name="LaneRight" type="Marker2D" parent="."]
+position = Vector2(368, 531)
+
+[node name="Player" parent="." instance=ExtResource("1_ig7tw")]
+position = Vector2(277, 531)
+script = ExtResource("2_0xm2m")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameOverPanel" type="Panel" parent="CanvasLayer"]
+visible = false
+offset_top = 18.0
+offset_right = 40.0
+offset_bottom = 58.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer/GameOverPanel"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 75.0
+offset_top = 143.5
+offset_right = 76.0
+offset_bottom = 306.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.110943, 0.407251, 0.191501, 1)
+theme_override_fonts/font = ExtResource("8_5vw27")
+theme_override_font_sizes/font_size = 82
+text = "GAME OVER!"
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/GameOverPanel"]
+process_mode = 3
+layout_mode = 0
+offset_left = 136.0
+offset_top = 378.0
+offset_right = 370.0
+offset_bottom = 452.0
+theme_override_fonts/font = ExtResource("8_5vw27")
+theme_override_font_sizes/font_size = 54
+text = "Restart!"
+
+[node name="StartPanel" type="Panel" parent="CanvasLayer"]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StartLabel" type="Label" parent="CanvasLayer/StartPanel"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 64.0
+offset_right = 504.0
+offset_bottom = 199.0
+theme_override_colors/font_color = Color(0.239216, 0.352941, 0.501961, 1)
+theme_override_fonts/font = ExtResource("8_5vw27")
+theme_override_font_sizes/font_size = 54
+text = "Mouse Street Runner!"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="StartButton" type="Button" parent="CanvasLayer/StartPanel"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 384.0
+offset_right = 411.0
+offset_bottom = 458.0
+theme_override_fonts/font = ExtResource("8_5vw27")
+theme_override_font_sizes/font_size = 54
+text = "Start Game!"
+
+[node name="PauseButton" type="Button" parent="."]
+process_mode = 3
+top_level = true
+offset_left = 416.0
+offset_top = 15.0
+offset_right = 747.0
+offset_bottom = 335.0
+scale = Vector2(0.1, 0.1)
+metadata/_edit_use_anchors_ = true
+
+[node name="LevelUpLabel" type="Label" parent="."]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = 198.0
+offset_right = 464.0
+offset_bottom = 401.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.160784, 0.196078, 0.254902, 1)
+theme_override_fonts/font = ExtResource("8_5vw27")
+theme_override_font_sizes/font_size = 82
+text = "Level 1"
+autowrap_mode = 2
+
+[node name="PauseTimer" type="Timer" parent="."]
+process_mode = 3
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="pressed" from="CanvasLayer/GameOverPanel/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/StartPanel/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="timeout" from="PauseTimer" to="." method="_on_pause_timer_timeout"]
