@@ -75,7 +75,8 @@ A JavaScript/browser version of this demo is included in the `html/` directory o
 
 ## Screenshots
 
-*(To Add game screenshots here!)*
+![image](https://github.com/user-attachments/assets/f417cc3b-643f-4ad1-bcd6-a55449067aed)
+
 
 ---
 
